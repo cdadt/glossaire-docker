@@ -3,8 +3,8 @@ services:
   base:
     image: node:10-buster
     volumes:
-    - ./glossaire-app:/usr/src/service
-    - ./glossaire_app/node_modules/:/usr/src/service/node_modules
+    - ./glossaire-api:/usr/src/service
+    - ./glossaire_api/node_modules:/usr/src/service/node_modules
     working_dir: /usr/src/service
 
   install:
@@ -17,10 +17,3 @@ services:
     extends:
       service: base
     command: npm audit fix
-  
-  build:
-    extends:
-      service: base
-    command: npm run build
-  
-  

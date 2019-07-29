@@ -1,0 +1,38 @@
+version: "2"
+services:
+  
+  mongodb:
+    image: mongo:latest   
+    ports:
+    - "27017:27017"
+    volumes:
+    - "./data:/data/db"
+
+  api:
+    image: node:10-buster
+    volumes:
+    - ./glossaire-api/:/usr/src/service
+    - ./glossaire-api/node_modules/:/usr/src/service/node_modules
+    working_dir: /usr/src/service
+    command: bash -c "node --experimental-modules server.mjs"
+    ports:
+    - "2223:2223"
+
+    environment:
+    
+    - MONGODB__URL=mongodb://mongodb:27017/glossaire
+    - TOKEN__SECRET=glossairesecret
+    - TOKEN__DURATION=3600
+
+    depends_on:
+    - mongodb
+
+  app:
+    image: node:10-buster
+    volumes:
+    - ./glossaire-app:/usr/src/service
+    - ./glossaire-app/node_modules:/usr/src/service/node_modules
+    working_dir: /usr/src/service
+    command: bash -c "npm run start"
+    ports:
+    - "4200:4200"
