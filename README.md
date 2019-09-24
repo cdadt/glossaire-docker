@@ -18,10 +18,13 @@ git clone https://github.com/cdadt/glossaire-api.git
 
 Pour pouvoir accéder a l'application conteneuriser, modifier la ligne 
 
-> "start": "ng serve 
+```
+"start": "ng serve 
+```
 
 du fichier `package.json` comme suit:
-> 
+
+```
   "name": "glossaire-cdadt",
   "version": "0.0.0",
   "scripts": {
@@ -31,6 +34,7 @@ du fichier `package.json` comme suit:
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+```
     
 **Cela va forcer l'application à écouter pour toutes les adresses ip**.
 
